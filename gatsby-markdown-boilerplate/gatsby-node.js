@@ -26,9 +26,10 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
  * so you can query your data in order to create pages. */
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  const blogTemplate = path.resolve('./src/templates/blog.js')
+  const postTemplate = path.resolve('./src/templates/blog/post/index.js')
+  const blogTemplate = path.resolve('./src/templates/blog/index.js')
 
-  // Query all data from markdownFiles
+  // Query each post from markdownFiles
   const result = await graphql
   (`{
           allMarkdownRemark {
@@ -42,13 +43,14 @@ exports.createPages = async ({ graphql, actions }) => {
           }
       }`)
 
-  // data
+  // data posts
   const posts = result.data.allMarkdownRemark.edges
 
   posts.forEach(({ node: post }) => {
     createPage({
       path: post.fields.slug,
-      component: blogTemplate
+      component: postTemplate
     })
   })
+
 }

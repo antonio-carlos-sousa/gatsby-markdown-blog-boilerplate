@@ -296,7 +296,7 @@ type ImageSharp implements Node {
         quality: Int,
         rotate: Int = 0,
         sizes: String = "",
-        #A list of image widths to be generated. Example: [ 200, 340, 520, 890 ]
+        #A blogList of image widths to be generated. Example: [ 200, 340, 520, 890 ]
         srcSetBreakpoints: [Int] = [],
         toFormat: ImageFormat = NO_CHANGE,
         toFormatBase64: ImageFormat = NO_CHANGE,
@@ -323,7 +323,7 @@ type ImageSharp implements Node {
         quality: Int,
         rotate: Int = 0,
         sizes: String = "",
-        #A list of image widths to be generated. Example: [ 200, 340, 520, 890 ]
+        #A blogList of image widths to be generated. Example: [ 200, 340, 520, 890 ]
         srcSetBreakpoints: [Int] = [],
         toFormat: ImageFormat = NO_CHANGE,
         toFormatBase64: ImageFormat = NO_CHANGE,
