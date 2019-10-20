@@ -50,7 +50,7 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: post.fields.slug,
       component: postTemplate
+      /** todo context, and prev and next page */
     })
   })
-
 }

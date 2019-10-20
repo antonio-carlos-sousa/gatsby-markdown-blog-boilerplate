@@ -7,8 +7,8 @@ const BlogPost = () => {
 
   return (
     <Layout>
-      <div className={styles.title}>
-        <h1>Will be the title for each Post</h1>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Will be the title for each Post</h1>
       </div>
 
       <div className={styles.content}>
