@@ -30,28 +30,51 @@ exports.createPages = async ({ graphql, actions }) => {
   const blogTemplate = path.resolve('./src/templates/blog/index.js')
 
   // Query each post from markdownFiles
-  const result = await graphql
-  (`{
-          allMarkdownRemark {
-              edges {
-                  node {
-                      fields {
-                          slug
-                      }
-                  }
-              }
+  const result = await graphql(
+    `{
+      allMarkdownRemark(sort: {fields: [frontmatter___date], order: DESC}, limit: 1000) {
+        edges {
+          node {
+            fields {
+              slug
+            }
           }
-      }`)
+          next {
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+              date(locale: "pt-br", formatString: "DD [de] MMMM[,] YYYY")
+            }
+          }
+          previous {
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+              date(locale: "pt-br", formatString: "DD [de] MMMM[,] YYYY")
+            }
+          }
+        }
+      }
+    }`)
+
+  // TODO: validar se a data esta a ser ordernada mesmo sem filtrar a informação dela
 
   // data posts
   const posts = result.data.allMarkdownRemark.edges
 
-  posts.forEach(({ node: post }) => {
+  posts.forEach(({ node: post, next, previous }) => {
     createPage({
       path: post.fields.slug,
       component: postTemplate,
       context: {
-        slug: post.fields.slug
+        slug: post.fields.slug,
+        // inverted because order: DESC
+        previous: next,
+        next: previous
       }
     })
   })
